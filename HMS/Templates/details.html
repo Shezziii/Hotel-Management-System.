@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{%  block start %}
+<br><br>
+
+<div class="row search-card-result">
+                
+
+                  
+                    <div class="col-md-4">
+                       
+                    <a href="/details/{{hotels_obj.id}}">
+                        <img class="img-fluid p-0" src="{% static hotels_obj.Hotel_name|add:'.jpg' %}" style="height:100%; width:100%" alt="Card image cap">
+                    
+                    </a></div>
+               
+                    <div class="col-md-5 mt-2">
+                        <h4>{{hotels_obj.Hotel_name}}</h4>
+                        
+                        <p>
+                            {{hotels_obj.description|truncatechars:150}}
+                        </p>
+                        <p>
+                            <b>Amenities</b><br>
+                            {%for amenitie in hotels_obj.amenities.all %}
+                            <text>{{amenitie.Amenities_name}}</text>,
+                            {% endfor %}
+                        </p>
+                        
+                    </div>
+                    <div class="col-md-3 border-left text-center more-offers">
+                        <b>Placed at</b>
+                        <p>{{hotels_obj.place}}</p>
+                        <b>Room Cost</b>
+                        <p>${{hotels_obj.cost}}</p>
+                        <b>Room count</b>
+                        <p>{{hotels_obj.room_count}}</p>
+                    </div>
+                    
+                </div>
+         
+               
+            </div>
+        </div>
+
+    </div>   <div class="row">
+        {% for i in '123'|make_list %}
+        <div class="col-md-3 m-auto mt-3">
+            <img src="{% static hotels_obj.Hotel_name|add:i|add:'.jpg'%}" style="height:100%; width:100%">
+            
+        </div>
+        {% endfor %}
+    </div><br>
+    {% if request.user.is_authenticated %}
+    <div class="filter-card">
+        <h5>Book Hotel</h5>
+        {%include "messages.html"%}
+        <form method="post" action='/details/{{hotels_obj.id}}/'>
+            {% csrf_token %}
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label for="mintopay">Check in</label>
+                    <p>
+                        <input type="date" name="checkin" id="checkin" class="form-control">
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <label for="maxtopay">Check out</label>
+                    <p>
+                        <input type="date" name="checkout" id="checkout" class="form-control">
+                    </p>
+                </div>
+            </div>
+           
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-block" value="Book">
+                <br><br></div>
+            </div>
+        </form>
+    </div>
+    {% else %}
+
+    <a href="/login/" class="btn btn-error btn-lg btn-block mt-5 ">Login</a>
+    {% endif %}
+</div>
+
+{% endblock %}

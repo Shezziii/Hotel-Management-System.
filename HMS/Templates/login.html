@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{%  block start %}
+
+<div class="container mt-5 pt-5 col-6">
+{% include 'messages.html' %}
+    <form method="POST" action='/login/'>
+        {% csrf_token %}
+        {%include "messages.html"%}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" name="uname" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="upass" class="form-control" id="exampleInputPassword1">
+        </div><br>
+         <div class="col text-center">
+        <button type="submit" class="btn btn-primary btn-large ">Login</button>
+      </form>
+      <p class='mt-2' >Don't have a <a href="/signup/" class='h6 text-primary text-decoration-none' >Account.</a></p></div>
+</div>
+
+<br><br><br>
+{% endblock %}

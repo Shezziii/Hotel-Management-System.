@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{%  block start %}
+
+<div class="container mt-5 pt-5 col-6">
+
+    <form method="POST" action='/signup/'>
+        {% csrf_token %}
+        {%include "messages.html"%}
+         <div class="mb-3">
+     <label class="form-label" for="exampleFormControlInput1">
+      Username
+     </label>
+     <input class="form-control" id="exampleFormControlInput1" name="uname" required="" type="text"/>
+    </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" name="uemail" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+         <label class="form-label" for="exampleFormControlInput1">
+     Password
+    </label>
+    <input class="form-control" id="txtPassword1" minlength="8" name="upass" oninvalid="error()" required="" type="password"/>
+   </div>
+   <div class="mb-3">
+    <label class="form-label" for="exampleFormControlInput1">
+     Confirm Password
+    </label>
+    <input class="form-control" id="txtPassword" minlength="8" name="cpass" required="" type="password"/>
+    </div>
+    <div class="form-check m-2">
+     <input class="form-check-input" id="flexCheckDefault" onclick="var temp = document.getElementById('txtPassword1'); var temp1 = document.getElementById('txtPassword');  if (temp.type === 'password'){      temp1.type = 'text';temp.type = 'text';   } else {  temp.type = 'password';temp1.type = 'password'; }" type="checkbox" value=""/>
+     <label class="form-check-label" for="flexCheckDefault">
+      Show Password
+     </label>
+    </div>
+        <br>
+        <div class="col text-center"><button type="submit" class="btn btn-primary ">Register</button>
+      </form>
+      <p class='mt-2' >already have a <a href="/login/" class='h6 text-primary text-decoration-none' >Account.</a></p></div>
+</div>
+
+
+{% endblock %}+
